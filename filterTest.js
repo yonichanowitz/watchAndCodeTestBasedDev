@@ -2,56 +2,73 @@
 
 <script>
 
-function filter(array,callback,configurableThisObject){
-
+function filter(origionalArray,callback,optionalThis){
+  var filteredAlready = callback,
+      newArr = [];
+  if(optionalThis){
+    filteredAlready = callback.bind(optionalThis);
+  }
+   for(var i = 0;i< origionalArray.length;i++){
+     if(filteredAlready(origionalArray[i],i,origionalArray)){
+       newArr.push(origionalArray[i]);
+     }
+   }
+   return newArr
 }
 
   tests({
     'run callback function array.length times ': function(){
-     /*
-     var counter = 0;
-     forEach([1,2,3],function(){
-       counter++;
-     });
-     eq(counter,3);*/
 
-    fail();
+     var timesItWasRun = 0;
+     filter([1,2,3],function(){
+       timesItWasRun++;
+     });
+     eq(timesItWasRun,3);
+
     },
     'pass in the "i"th element as first argument to callback': function(){
-    /*  forEach([1], function(number){
+      filter([1], function(number){
         eq(number, 1);
-      });*/
-      fail();
+      });
+
     },
     'position of index ("i"th position) as second argument':function(){
-      /*forEach([1], function(number,index){
+      filter([1], function(number,index){
         eq(index, 0);
-      });*/
-     fail();
+      });
      },
     'access to origional array as third argument':function(){
-    /*  var testArr = [1,2,3];
-      forEach(testArr, function(number,index,originArray){
+     var testArr = [1,2,3];
+      filter(testArr, function(number,index,originArray){
         eq(originArray, testArr);
       });
-   */
-        fail();
+
     },
     'access to this argument':function(){
-    /*  forEach([1],function(){
+       filter([1],function(){
         eq(this.description, 'configurable this object');
 
       }, {description:'configurable this object'});
-      */
-      fail();
+
+  },
+  'should return array':function(){
+      filteredArr = filter([], function(){});
+    eq(Array.isArray(filteredArr),true);
+
   },
   'return new array, not the one being filtered':function(){
-    fail();
+    var testArr = [],
+    filteredArr = filter(testArr, function(){});
+    eq(testArr !== filteredArr, true);
   },
   'new array should only have elements that return true when running callback':function(){
-    fail();
+    var filteredArr = filter([1,2],function(number){
+      return number >1
+    });
+    eq(filteredArr.length, 1);
+    eq(filteredArr[0],2)
   }
 
-})
+});
 
 </script>
