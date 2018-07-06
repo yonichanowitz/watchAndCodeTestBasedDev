@@ -1,0 +1,19 @@
+<script src="../tinytest.js"></script>
+
+<script>
+
+function reduce(origionalArray,callback,optionalThis){
+
+}
+
+  tests({
+    'accumulator ': function(){
+
+  },
+  'currentValue ': function(){
+
+}
+
+});
+
+</script>
