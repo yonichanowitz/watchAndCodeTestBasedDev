@@ -44,7 +44,15 @@ edge cases
  or initial value is there but array is empty
     item is returned without calling mapCallback
 
+example of edge cases
+reduce([/*hole*/,1],function(){})
+//return 1 without calling callback
 
+reduce([1], function(){})
+//return 1 without calling callback
+
+reduce([/*hole*/,/*hole*/],function(){})
+//return 0 without calling callback
 
 
 */
