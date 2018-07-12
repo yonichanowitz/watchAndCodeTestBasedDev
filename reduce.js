@@ -26,6 +26,9 @@ returns single value
 
 execute once for each item in Array
 
+//should not run holes in array 
+//[hole,1]
+
 //if initialValue, previousValue should === initial value example
 //if initialValue, currentValue === first value in array
 //if initialValue, callback starts i[0]
@@ -57,13 +60,13 @@ edge cases
     item is returned without calling mapCallback
 
 example of edge cases
-reduce([/*hole*/,1],function(){})
+reduce([hole,1],function(){})
 //return 1 without calling callback
 
 reduce([1], function(){})
 //return 1 without calling callback
 
-reduce([/*hole*/,/*hole*/],function(){})
+reduce([hole , hole],function(){})
 //return 0 without calling callback
 
 
