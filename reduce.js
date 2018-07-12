@@ -17,10 +17,11 @@ function reduce(origionalArray,callback,optionalThis){
 });
 
 /*
-mapCallback   previousVBalue
-currentValue
-currentIndex
-Array
+fucntion reduce(array, current,  previous ){
+for(var i = 0; i < array.length;i++){
+    
+   }
+ };
 
 returns single value
 
@@ -29,34 +30,43 @@ execute once for each item in Array
 //should not run holes in array 
 //[hole,1]
 
-//if initialValue, previousValue should === initial value example
-//if initialValue, currentValue === first value in array
-//if initialValue, callback starts i[0]
+//. example
+//
+//
 
-//if !initialValue, previousValue should === first value in array
-//if !initialValue, currentValue === second value in array
-//if !initialValue, callback starts i[1]
+//
+//
+//
 
 edge cases
 
-//if empty, no initialValue, throw TypeError
-//if one element, no initialValue, return only element without calling callback
-//if array empty, no initialValue, return initialValue
+//
+//
+//
 
-should actually reduce array
+//
+//
+//
 
 
-example of edge cases
-reduce([hole,1],function(){})
-//return 1 without calling callback
-
-reduce([1], function(){})
-//return 1 without calling callback
-
-reduce([hole , hole],function(){})
-//return 0 without calling callback
 
 
 */
+tests({
+ 'if initialValue, previousValue should start with initial value';function(){
+  fail();  
+}
+ 'if initialValue, currentValue === first value in array';function(){}
+ 'if initialValue, callback starts i[0]';function(){}
+ 'if !initialValue, previousValue should === first value in array';function(){}
+ 'if !initialValue, currentValue === second value in array';function(){}
+ 'if !initialValue, callback starts i[1]';function(){}
+ 'if initialValue, array empty, return initialValue without callback';function(){}
+ 'if no initialValue, one element, return only element without calling callback';function(){}
+ 'if empty, no initialValue, throw TypeError';function(){}
+ 'should exclude holes';function(){}
+ 'should actually reduce array';function(){}
+ 'should pass array as 4th arg to callback';function(){}
+      });
 
 </script>
