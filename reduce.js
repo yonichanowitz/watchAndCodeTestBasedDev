@@ -19,12 +19,12 @@ function reduce(origionalArray,callback,optionalThis){
 
 function reduce(theArray,callback,initialValue){
   var startingIndex = 0;
-if(arguments.length <= 3){
+if(arguments.length < 3){
    startingIndex++;
 }
 
-  for(var i = startingIndex; i<theArray.length;i++){
-    callback();
+  for(var i = startingIndex; i < theArray.length; i++){
+    callback(initialValue,theArray[i]);
   }
 }
 
@@ -41,7 +41,7 @@ tests({
        reduce([1],function(){
          numberOfTimesRun++;
        });
-       eq(numberOfTimesRun,1);
+       eq(numberOfTimesRun,0);
   },
  'if initialValue, previousValue should start with initial value':function(){
 
@@ -51,11 +51,15 @@ reduce([1],function(previousValue){
 
 },
  'if initialValue, currentValue === first value in array':function(){
+  reduce([1],function(previousValue,currentValue){
+    eq(currentValue, 1);
+  },0);
 
-fail();
  },
  'if initialValue, callback starts i[0]':function(){
-fail();
+   reduce([1],function(previousValue,currentValue){
+     eq(currentValue, 1);
+   },0);
 
  },
  'if !initialValue, previousValue should === first value in array':function(){
