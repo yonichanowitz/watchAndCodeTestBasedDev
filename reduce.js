@@ -2,29 +2,15 @@
 
 <script>
 
-function reduce(origionalArray,callback,optionalThis){
-
-}
-
-  tests({
-    'accumulator ': function(){
-
-  },
-  'currentValue ': function(){
-
-}
-
-});
-
-
 function reduce(theArray,callback,initialValue){
+
   var startingIndex = 0;
 if(arguments.length < 3){
-   startingIndex++;
+   startingIndex = theArray[i];
 }
 
   for(var i = startingIndex; i < theArray.length; i++){
-    callback(initialValue,theArray[i]);
+    callback(initialValue,theArray[i],i);
   }
 }
 
@@ -57,21 +43,27 @@ reduce([1],function(previousValue){
 
  },
  'if initialValue, callback starts i[0]':function(){
-   reduce([1],function(previousValue,currentValue){
-     eq(currentValue, 1);
+   reduce([1],function(previousValue,currentValue,currentIndex){
+     eq(currentIndex, 0);
    },0);
 
  },
  'if !initialValue, previousValue should === first value in array':function(){
-fail();
+   reduce([2,4,6],function(previousValue,currentValue,currentIndex){
+     eq(previousValue, 2);
+   });
 
  },
  'if !initialValue, currentValue === second value in array':function(){
-fail();
+   reduce([2,4,6],function(previousValue,currentValue,currentIndex){
+     eq(currentValue, 4);
+   });
 
  },
  'if !initialValue, callback starts i[1]':function(){
-   fail();
+   reduce([2,4,6],function(previousValue,currentValue,currentIndex){
+     eq(currentValue, 4);
+   });
  },
  'if initialValue, array empty, return initialValue without callback':function(){
    fail();
@@ -92,5 +84,7 @@ fail();
    fail();
  }
       });
+
+
 
 </script>
