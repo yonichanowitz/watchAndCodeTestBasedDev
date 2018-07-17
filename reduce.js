@@ -60,9 +60,9 @@ reduce([1],function(previousValue){
    });
 
  },
- 'if !initialValue, callback starts i[1]':function(){
+'if !initialValue, callback index starts i[1]':function(){
    reduce([2,4,6],function(previousValue,currentValue,currentIndex){
-     eq(currentValue, 4);
+     eq(currentIndex, 1);
    });
  },
  'if initialValue, array empty, return initialValue without callback':function(){
