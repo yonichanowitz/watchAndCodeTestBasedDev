@@ -4,8 +4,20 @@
 
 function reduce(theArray,callback,initialValue){
 
+//check if empty
+if (Object.keys(theArray).length === 0){
+  if(arguments.length < 3){
+    return "TypeError";
+  }
+  return initialValue;
+}
+
+
   var startingIndex = 0;
 if(arguments.length < 3){
+  if (Object.keys(theArray).length === 1){
+      return Object.keys(theArray);
+  }
    startingIndex = theArray[i];
 }
 
@@ -60,19 +72,24 @@ reduce([1],function(previousValue){
    });
 
  },
- 'if !initialValue, callback starts i[1]':function(){
+ 'if !initialValue, callback index starts i[1]':function(){
    reduce([2,4,6],function(previousValue,currentValue,currentIndex){
-     eq(currentValue, 4);
+     eq(currentIndex, 1);
    });
  },
  'if initialValue, array empty, return initialValue without callback':function(){
-   fail();
+  var initialValueHere = 'zero';
+   var reduceresult = reduce([,,,],function(){ },'zero');
+    eq(reduceresult, initialValueHere);
  },
  'if no initialValue, one element, return only element without calling callback':function(){
-   fail();
+
+    var reduceresult = reduce([,,2,],function(){ });
+     eq(reduceresult, 2);
  },
  'if empty, no initialValue, throw TypeError':function(){
-   fail();
+   var reduceresult = reduce([,,],function(){ });
+    eq(reduceresult, "TypeError");
  },
  'should exclude holes':function(){
    fail();
@@ -84,6 +101,7 @@ reduce([1],function(previousValue){
    fail();
  }
       });
+
 
 
 
