@@ -4,6 +4,7 @@
 
 function reduce(theArray,callback,initialValue){
 
+var startingIndex = 0;
 //check if empty
 if (Object.keys(theArray).length === 0){
   if(arguments.length < 3){
@@ -12,8 +13,6 @@ if (Object.keys(theArray).length === 0){
   return initialValue;
 }
 
-
-  var startingIndex = 0;
 if(arguments.length < 3){
   if (Object.keys(theArray).length === 1){
       return Object.keys(theArray);
