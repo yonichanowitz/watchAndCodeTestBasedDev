@@ -5,27 +5,33 @@
 function reduce(theArray,callback,initialValue){
 
 var startingIndex = 0;
-//check if empty
-if (Object.keys(theArray).length === 0){
-  if(arguments.length < 3){
-    return "TypeError";
-  }
-  return initialValue;
-}
-
+var resultsSoFar = initialValue;
+//if no initialValue
 if(arguments.length < 3){
+  resultsSoFar = theArray[startingIndex];
+ startingIndex++;
+//if array has one element return it
   if (Object.keys(theArray).length === 1){
-      return Object.keys(theArray);
+      var singleIndex = Object.keys(theArray)[0];
+      var singleElement = theArray[singleIndex];
+      return singleElement;
+  }else{
+    //there is an initial value but nothing in array
+    if(Object.keys(theArray).length === 0){
+      return initialValue;
+    }
+  
   }
-   startingIndex = theArray[i];
 }
-
   for(var i = startingIndex; i < theArray.length; i++){
     callback(initialValue,theArray[i],i);
-  }
-}
+    }
+  };
+
+
 
 tests({
+
   "if initialValue callback should run array.length times":function(){
  var numberOfTimesRun = 0;
     reduce([1],function(){
@@ -40,20 +46,19 @@ tests({
        });
        eq(numberOfTimesRun,0);
   },
- 'if initialValue, previousValue should start with initial value':function(){
-
-reduce([1],function(previousValue){
+ "if initialValue, previousValue should start with initial value":function(){
+  reduce([1],function(previousValue){
   eq(previousValue,0);
-},0);
+    },0);
 
 },
- 'if initialValue, currentValue === first value in array':function(){
+ "if initialValue, currentValue === first value in array":function(){
   reduce([1],function(previousValue,currentValue){
     eq(currentValue, 1);
   },0);
 
  },
- 'if initialValue, callback starts i[0]':function(){
+ "if initialValue, callback starts i[0]":function(){
    reduce([1],function(previousValue,currentValue,currentIndex){
      eq(currentIndex, 0);
    },0);
@@ -78,8 +83,12 @@ reduce([1],function(previousValue){
  },
  'if initialValue, array empty, return initialValue without callback':function(){
   var initialValueHere = 'zero';
-   var reduceresult = reduce([,,,],function(){ },'zero');
+  var numberOfTimesRun = 0;
+   var reduceresult = reduce([,,,],function(){
+   numberOfTimesRun++;
+    },'zero');
     eq(reduceresult, initialValueHere);
+    eq(numberOfTimesRun,0);
  },
  'if no initialValue, one element, return only element without calling callback':function(){
 
@@ -87,8 +96,7 @@ reduce([1],function(previousValue){
      eq(reduceresult, 2);
  },
  'if empty, no initialValue, throw TypeError':function(){
-   var reduceresult = reduce([,,],function(){ });
-    eq(reduceresult, "TypeError");
+  fail();
  },
  'should exclude holes':function(){
    fail();
@@ -99,7 +107,8 @@ reduce([1],function(previousValue){
  'should pass array as 4th arg to callback':function(){
    fail();
  }
-      });
+
+});
 
 
 
