@@ -4,32 +4,33 @@
 
   
 function reduce(theArray,callback,initialValue){
-var valueToReturn = '';
 var startingIndex = 0;
 var resultsSoFar = initialValue;
+
 //if no initialValue
 if(arguments.length < 3){
   resultsSoFar = theArray[startingIndex];
  startingIndex++;
 //if array has one element return it
-//55:51
 if (Object.keys(theArray).length === 1){
     var singleIndex = Object.keys(theArray)[0];
     var singleElement = theArray[singleIndex];
-      return singleElement
+      return singleElement;
     }
     if (Object.keys(theArray).length === 0){
       return "TypeError";
     }
+    //has initialValue
   }else{
     //there is an initial value but nothing in array
     if(Object.keys(theArray).length === 0){
       return initialValue;
       }
-    for(var i = startingIndex; i < theArray.length; i++){
-      callback(resultsSoFar,theArray[i],i);
-      }
     }
+    for(var i = startingIndex; i < theArray.length; i++){
+      resultsSoFar + callback(resultsSoFar,theArray[i],i);
+    }
+    return resultsSoFar;
   };
 
 
@@ -75,13 +76,13 @@ tests({
 
  },
  'if !initialValue, currentValue === second value in array':function(){
-   reduce([2,4,6],function(previousValue,currentValue,currentIndex){
+   reduce([2,4],function(previousValue,currentValue,currentIndex){
      eq(currentValue, 4);
    });
 
  },
  'if !initialValue, callback index starts i[1]':function(){
-   reduce([2,4,6],function(previousValue,currentValue,currentIndex){
+   reduce([2,4],function(previousValue,currentValue,currentIndex){
      eq(currentIndex, 1);
    });
  },
@@ -104,6 +105,12 @@ tests({
  'if empty, no initialValue, throw TypeError':function(){
     var reduceresult = reduce([,,,,],function(){});
     eq(reduceresult,"TypeError");
+ },
+ 'should actually reduce':function(){
+   var results = reduce([1,2,3],function(a,b){
+     return a + b;
+   },0);
+   eq(results,6);
  },
  'should exclude holes':function(){
    fail();
