@@ -34,7 +34,7 @@ function reduce(theArray,callback,initialValue){
     }
     for(var i = startingIndex; i < arrLength; i++) {
         if(i in theArray){
-            resultsSoFar = callback(resultsSoFar,theArray[i],i);
+            resultsSoFar = callback(resultsSoFar,theArray[i],i,theArray);
         }
     }
     return resultsSoFar;
@@ -135,11 +135,13 @@ tests({
           eq(isTypeError,true);
     },
     "should pass array as 4th arg to callback":function(){
-        fail();
+        var testArray = [1,2];
+        reduce(testArray,function(previous,currentVal,currentIndex,origionalArray){
+          eq(origionalArray,testArray);
+        });
     }
 
 });
-
 
 
 
