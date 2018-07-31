@@ -49,7 +49,7 @@ tests({
         var numberOfTimesRun = 0;
         reduce([1], function() {
             numberOfTimesRun++;
-        },0);
+        }, 0);
        eq(numberOfTimesRun, 1);
    },
    "if no initialValue callback should run array.length-1 times":function() {
@@ -62,18 +62,18 @@ tests({
     "if initialValue, previousValue should start with initial value":function() {
          reduce([1], function(previousValue) {
          eq(previousValue, 0);
-         },0);
+         }, 0);
 
     },
     "if initialValue, currentValue === first value in array":function() {
         reduce([1], function(previousValue, currentValue) {
         eq(currentValue, 1);
-        },0);
+        }, 0);
     },
     "if initialValue, callback starts i[0]":function() {
         reduce([1],function(previousValue, currentValue, currentIndex) {
         eq(currentIndex, 0);
-        },0);
+        }, 0);
     },
     "if !initialValue, previousValue should === first value in array":function() {
          reduce([2], function(previousValue, currentValue, currentIndex) {
@@ -110,7 +110,7 @@ tests({
     "should actually reduce array":function(){
             var results = reduce([1, 2, 3], function(a, b) {
                 return a + b;
-            },0);
+            }, 0);
             eq(results, 6);
     },
     "if initialValue should exclude holes":function(){
