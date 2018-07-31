@@ -13,10 +13,10 @@ function reduce(theArray,callback,initialValue){
     if(arguments.length < 3){
 
 //if array has one element return it
-        if(objKeysInArr.length === 0) {
+        if(objKeysInArr.length === 0){
             throw new TypeError('Reduce of empty array with no initial value');
         }
-        if (objKeysInArr.length === 1){
+        if(objKeysInArr.length === 1){
             var onlyIndex = objKeysInArr[0];
             var onlyElement = theArray[onlyIndex];
             return onlyElement;
@@ -30,11 +30,11 @@ function reduce(theArray,callback,initialValue){
     //has initialValue
     } else{
     //there is an initial value but nothing in array
-        if(objKeysInArr.length === 0) {
+        if(objKeysInArr.length === 0){
             return initialValue;
         }
     }
-    for(var i = startingIndex; i < arrLength; i++) {
+    for(var i = startingIndex; i < arrLength; i++){
         if(i in theArray){
             resultsSoFar = callback(resultsSoFar,theArray[i],i,theArray);
         }
