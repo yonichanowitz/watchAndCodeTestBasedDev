@@ -3,19 +3,21 @@
 <script>
 
   
+
 function reduce(theArray,callback,initialValue){
     var startingIndex = 0;
     var resultsSoFar = initialValue;
     var arrLength = theArray.length;
+    var objKeysInArr = Object.keys(theArray);
 //if no initialValue
     if(arguments.length < 3){
 
 //if array has one element return it
-        if(Object.keys(theArray).length === 0) {
+        if(objKeysInArr.length === 0) {
             throw new TypeError('Reduce of empty array with no initial value');
         }
-        if (Object.keys(theArray).length === 1){
-            var onlyIndex = Object.keys(theArray)[0];
+        if (objKeysInArr.length === 1){
+            var onlyIndex = objKeysInArr[0];
             var onlyElement = theArray[onlyIndex];
             return onlyElement;
         }
@@ -28,7 +30,7 @@ function reduce(theArray,callback,initialValue){
     //has initialValue
     } else{
     //there is an initial value but nothing in array
-        if(Object.keys(theArray).length === 0) {
+        if(objKeysInArr.length === 0) {
             return initialValue;
         }
     }
@@ -142,6 +144,8 @@ tests({
     }
 
 });
+
+
 
 
 
