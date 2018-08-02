@@ -53,3 +53,4 @@ var fail               = TinyTest.fail.bind(TinyTest),
     eq                 = TinyTest.assertEquals.bind(TinyTest), // alias for assertEquals
     assertStrictEquals = TinyTest.assertStrictEquals.bind(TinyTest),
     tests              = TinyTest.run.bind(TinyTest);
+var newDiv = document.createElement('div');
