@@ -1,0 +1,83 @@
+<script src="../simpleTest.js"></script>
+
+<script>
+
+function slice(theArray, begining, end) {
+  var result = [];
+  if(isNaN(begining)) {
+      return theArray;
+  }
+  for(var i = begining; i < theArray.length; i++) {
+    result += theArray[i];
+
+  }
+  return result;
+};
+
+//since we will test over an array every test, i will make one array, and keep using it
+var newArray = [1, 'a', true, 'dude', 7, false];
+
+tests({
+
+    'return shallow copy of array': function() {
+      eq(newArray, slice(newArray));
+    },
+    'begining should be an integer': function() {
+      eq(newArray, slice(newArray, 'a'));
+    },
+    'if the integer is negative, start from end of sequence in array': function() {
+      eq(newArray, slice(newArray, 1, 2));
+    },
+    'if the parameter is undefined, begin at index 0': function() {
+      fail();
+    },
+    'if begin parameter is greater length than array, return empty array': function() {
+      fail();
+    },
+    'second parameter is end': function() {
+      fail();
+    },
+    'end must be zero based integer': function() {
+      fail();
+    },
+    'end is the last number to loop over, but not include': function() {
+      fail();
+    },
+    'if end is a negative number, offset from end of sequence': function() {
+      fail();
+    },
+    'if no end given, end should equal array.length': function() {
+      fail();
+    },
+    'if value of end is greater than array.length, end should equal array.length': function() {
+      fail();
+    },
+    'if no second parameter, end of array is the end of section to get sliced': function() {
+      fail();
+    },
+    'do not include end in result': function() {
+      fail();
+    },
+    'do not change origional array': function() {
+      fail();
+    },
+    'if part of array is empty, skip it': function() {
+      fail();
+    },
+    'if part of array is an object, it should refer to origional object': function() {
+      fail();
+    },
+    'return new array': function() {
+      fail();
+    },
+    'return new array with copy of portion of array passed into slice': function() {
+      fail();
+    },
+    'if begining is a single value, return array': function() {
+      fail();
+    },
+    'if begining or end are not integers, return empty array': function() {
+      fail();
+    }
+});
+</script>
