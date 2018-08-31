@@ -3,12 +3,22 @@
 <script>
 
 function slice(theArray, begining, end) {
-  var result = [];
-  if(isNaN(begining)) {
-      return theArray;
+
+  var result = [],
+  begin = 0;
+  if(arguments.length > 1 && isNaN(begin)) {
+    begin = 0;
   }
-  for(var i = begining; i < theArray.length; i++) {
-    result += theArray[i];
+  if(begin < 0) {
+    begin = theArray.length + begining;
+
+  }/*else {
+    begin = begining;
+  }*/
+
+  for(var i = begin; i < theArray.length; i++) {
+
+    result.push(theArray[i]);
 
   }
   return result;
@@ -23,13 +33,15 @@ tests({
       eq(newArray, slice(newArray));
     },
     'begining should be an integer': function() {
-      eq(newArray, slice(newArray, 'a'));
+      slice(newArray, 'a');
+
+      eq(newArray, );
     },
     'if the integer is negative, start from end of sequence in array': function() {
-      eq(newArray, slice(newArray, 1, 2));
+      eq(newArray[4]+ ','+ newArray[5], slice(newArray, -2, 2));
     },
     'if the parameter is undefined, begin at index 0': function() {
-      fail();
+      eq(newArray, slice(newArray, ' ', 2));
     },
     'if begin parameter is greater length than array, return empty array': function() {
       fail();
@@ -37,7 +49,7 @@ tests({
     'second parameter is end': function() {
       fail();
     },
-    'end must be zero based integer': function() {
+    'second parameter; end, must be integer': function() {
       fail();
     },
     'end is the last number to loop over, but not include': function() {
