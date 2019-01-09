@@ -1,54 +1,102 @@
 <script src="../simpleTest.js"></script>
 
 <script>
-function find() {
-
-};
+  var testArray = ['pikachu', 'evee', 'raichu', 'sandshrew', 'magikarp'];
+function find(theArray, callback) {
+  var result = 0;
+  var sample = theArray.length;
+  for(var i = 0; i < sample; i++) {
+     result = result + 1;
+  }return result;
+}
 
 
 tests({
-'The find() method returns the value of the first element in the array':fucntion() {
+'loop through array, up to array.length amount of times':function() {
+  var timesRan = testArray.length;
+  var numberFound = find(testArray);
+  eq(timesRan, numberFound);
+},
+'pass each element of array to callback function':function() {
   fail();
 },
-'that satisfies the provided testing function.':fucntion() {
+'callback function should take an element argument':function() {
   fail();
 },
-'Otherwise undefined is returned.':fucntion() {
+'callback function should take an index argument':function() {
   fail();
 },
-'executes the callback function once for each index of the array until it finds one where callback returns a true':fucntion() {
+'execute the callback function once for each index of the array':function() {
   fail();
 },
-'If an element is found meeting callback criteria, find immediately returns the value of that element':fucntion() {
+'if fucntion returns true, return current element':function() {
   fail();
 },
-'callback is invoked with three arguments 3 the value of the element,':fucntion() {
+'test each element even if undefined':function() {
   fail();
 },
-'callback is invoked with three arguments 2 the index of the element,':fucntion() {
+'if nothing found return undefined':function() {
   fail();
 },
-'callback is invoked with three arguments 3 the Array object being traversed':fucntion() {
+'do not mutate origional array':function() {
   fail();
 },
-'If a thisArg parameter is provided to find, it will be used as the this for each invocation of the callback':fucntion() {
+'must take this argument':function() {
   fail();
 },
-'find does not mutate the array on which it is called':fucntion() {
+'callback must take index argument, to search array backwards (-1)':function() {
   fail();
 },
-'The range of elements processed by find is set before the first invocation of callback.':fucntion() {
+'if only element is passed as arguments to callback, return all elements':function() {
   fail();
 },
-'Elements that are appended to the array after the call to find begins will not be visited by callback.':fucntion() {
+'if only index is passed as arguments to callback, return all indexes':function() {
   fail();
 },
-'If an existing, unvisited element of the array is changed by callback, its value passed to the visiting callback will be the value at the time that find visits that elements index;':fucntion() {
+'Elements that are appended to the array after the call to find begins will not be visited by callback.':function() {
   fail();
 },
-'elements that are deleted are still visited':fucntion() {
+"If an existing, unvisited element of the array is changed by callback, its value passed to the visiting callback will be the value at the time that find visits that element's index": function() {
+  fail();
+},
+'elements that are deleted are still visited.':function() {
   fail();
 }
-)};
+});
 
+
+/*question: how to make small requirements that aren't too small, that add onto each other. example of too small===
+'loop through array'
+'pass element to callback'
+or maybe they aren't? maybe i should have a requirement 'selsect individual element'?
+but then it would be finding it already, and defeat the purpose of small features!
+
+once i loop with a for() loop, how do i keep the older requirement s working when the next requirement-
+ requires that i use the function as the means to make a loop. 
+ unless that is incorrect.
+
+when gordon does reduce() he starts with "if initialValue, callback should run array.length times"
+which he then tests by  
+a) declaring variable of amount of times it ran, set to zero 
+b) calling the function with the smallest of arrays, that only includes a number
+c) the function xcalls a callback which
+d) adds to the value of the variable declared in step 'a'
+e) tests the variable (eq) against the number 1 (since the value should have increased if the callback function ran)
+
+how did he know he was supposed to do that?
+
+to avoid modifying the origional array, i think that i can't use a new variable to asign a result to (to be returned) but rather, 
+have several loops and functions within each other that end in return statements. 
+this should work, as we only need to return a single value (or object) that satisfi
+
+use debugger, and enter items in scope into console
+only have assumptions when it helps you make progress
+
+what gordon did with reduce
+1) write them down, do not worry about being organized or exact requirements
+2) turn into concrete specific things to implement
+3) goes through description and makes every sentence with new information a requirement
+4) uses 'if' words as pointers to new requirements
+5) copies sentences from the description almost word-for-word, abut rewords them as questions
+*/
 </script>
