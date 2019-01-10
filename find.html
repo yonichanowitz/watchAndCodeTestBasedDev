@@ -1,68 +1,78 @@
 <script src="../simpleTest.js"></script>
 
 <script>
-  var testArray = ['pikachu', 'evee', 'raichu', 'sandshrew', 'magikarp'];
-    function find(theArray, callback) {
-      var result = 0;
-      var sample = theArray.length;
-      for (var i = 0; i < sample; i++) {
-        result = result + 1;
-      }
-    return result;
+  function find(theArray, callbackFunction) {
+    var result = 0;
+    for (var i = 0; i < theArray.length; i++) {
+      //make sure to include the () to make the parameter a function
+      callbackFunction();
+    }
+  
 }
 
 
 tests({
-'loop through array, up to array.length amount of times':function() {
-  var timesRan = testArray.length;
-  var numberFound = find(testArray);
-  eq(timesRan, numberFound);
-},
-'pass each element of array to callback function':function() {
-  fail();
-},
-'callback function should take an element argument':function() {
-  fail();
-},
-'callback function should take an index argument':function() {
-  fail();
-},
-'execute the callback function once for each index of the array':function() {
-  fail();
-},
-'if fucntion returns true, return current element':function() {
-  fail();
-},
-'test each element even if undefined':function() {
-  fail();
-},
-'if nothing found return undefined':function() {
-  fail();
-},
-'do not mutate origional array':function() {
-  fail();
-},
-'must take this argument':function() {
-  fail();
-},
-'callback must take index argument, to search array backwards (-1)':function() {
-  fail();
-},
-'if only element is passed as arguments to callback, return all elements':function() {
-  fail();
-},
-'if only index is passed as arguments to callback, return all indexes':function() {
-  fail();
-},
-'Elements that are appended to the array after the call to find begins will not be visited by callback.':function() {
-  fail();
-},
-"If an existing, unvisited element of the array is changed by callback, its value passed to the visiting callback will be the value at the time that find visits that element's index": function() {
-  fail();
-},
-'elements that are deleted are still visited.':function() {
-  fail();
-}
+  'loop through array, up to array.length amount of times':function() {
+    //declare array to be tested IN THIS TEST ONLY
+    var testArray = [1, 2, 3];
+    //declare variable of zero to be added to as counter of ammount of times the function has ran
+    var numberOfTimesRan = 0;
+    //call the find() fucntion, pass it the local array variable and a callback function 
+    // that will increase the value of the last variable we declared (numberOfTimesRan)
+    find(testArray, function() {
+      numberOfTimesRan ++;
+    });
+    //check if the function running is equal to my expectation of how many times it will run
+    eq(numberOfTimesRan, 3);
+  },
+  'pass each element of array to callback function':function() {
+    fail();
+  },
+  'callback function should take an element argument':function() {
+    fail();
+  },
+  'callback function should take an index argument':function() {
+    fail();
+  },
+  'execute the callback function once for each index of the array':function() {
+    fail();
+  },
+  'if fucntion returns true, return current element':function() {
+    fail();
+  },
+  'test each element even if undefined':function() {
+    fail();
+  },
+  'if nothing found return undefined':function() {
+    fail();
+  },
+  'do not mutate origional array':function() {
+    fail();
+  },
+  'must take this argument':function() {
+    fail();
+  },
+  'callback must take index argument, to search array backwards (-1)':function() {
+    fail();
+  },
+  'if only element is passed as arguments to callback, return all elements':function() {
+    fail();
+  },
+  'if only index is passed as arguments to callback, return all indexes':function() {
+    fail();
+  },
+  'Elements that are appended to the array after the call to find begins will not be visited by callback.':function() {
+    fail();
+  },
+  "If an existing, unvisited element of the array is changed by callback, its value passed to the visiting callback will be the value at the time that find visits that element's index": function() {
+    fail();
+  },
+  'elements that are deleted are still visited.':function() {
+    fail();
+  },
+  "make sure find() works with strings, booleans and objects": function() {
+    fail();
+  },
 });
 
 
@@ -105,18 +115,19 @@ what gordon did with reduce
 each test should be independent, and have it's own array that it uses. in short
 DON'T USE THE SAME ARRAY FOR EACH TEST
 it avoids creating extra, unnecessary work 
-don't inovate on things that don't matter, it creates confusion(the rules can only be broken by people who understand them)
+don't inovate on things that don't matter, it creates confusion(pokemon array)
+the rules can only be broken by people who understand them
 
 Yonaton, think about what Gordon’s saying… Think about the possibility if your test modifies the array, even accidentally?  Then all your tests are based on an array that has changed, or could change based on test results…
 
 what do you expect the result to be?
 what code will actually check how it will run?
-eq()
+eq(testCheckingStuff. expectedResult)
 
 variables are missleading
 err on the side of being more explicit
 focus on clarity, not brevity
 
-how do i frame my mind to do things that will lead to progress.
+how do i frame my mind to do things that will lead to progress?
 */
 </script>
