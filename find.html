@@ -2,12 +2,13 @@
 
 <script>
   var testArray = ['pikachu', 'evee', 'raichu', 'sandshrew', 'magikarp'];
-function find(theArray, callback) {
-  var result = 0;
-  var sample = theArray.length;
-  for(var i = 0; i < sample; i++) {
-     result = result + 1;
-  }return result;
+    function find(theArray, callback) {
+      var result = 0;
+      var sample = theArray.length;
+      for (var i = 0; i < sample; i++) {
+        result = result + 1;
+      }
+    return result;
 }
 
 
@@ -85,6 +86,8 @@ e) tests the variable (eq) against the number 1 (since the value should have inc
 
 how did he know he was supposed to do that?
 
+   ANSWER: by playing with fucntion
+
 to avoid modifying the origional array, i think that i can't use a new variable to asign a result to (to be returned) but rather, 
 have several loops and functions within each other that end in return statements. 
 this should work, as we only need to return a single value (or object) that satisfi
@@ -98,5 +101,22 @@ what gordon did with reduce
 3) goes through description and makes every sentence with new information a requirement
 4) uses 'if' words as pointers to new requirements
 5) copies sentences from the description almost word-for-word, abut rewords them as questions
+
+each test should be independent, and have it's own array that it uses. in short
+DON'T USE THE SAME ARRAY FOR EACH TEST
+it avoids creating extra, unnecessary work 
+don't inovate on things that don't matter, it creates confusion(the rules can only be broken by people who understand them)
+
+Yonaton, think about what Gordon’s saying… Think about the possibility if your test modifies the array, even accidentally?  Then all your tests are based on an array that has changed, or could change based on test results…
+
+what do you expect the result to be?
+what code will actually check how it will run?
+eq()
+
+variables are missleading
+err on the side of being more explicit
+focus on clarity, not brevity
+
+how do i frame my mind to do things that will lead to progress.
 */
 </script>
