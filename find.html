@@ -2,10 +2,9 @@
 
 <script>
   function find(theArray, callbackFunction) {
-    var result = 0;
     for (var i = 0; i < theArray.length; i++) {
       //make sure to include the () to make the parameter a function
-      callbackFunction();
+      callbackFunction(theArray[i]);
     }
   
 }
@@ -25,8 +24,17 @@ tests({
     //check if the function running is equal to my expectation of how many times it will run
     eq(numberOfTimesRan, 3);
   },
-  'pass each element of array to callback function':function() {
-    fail();
+  'execute the callback function once for each index in array':function() {
+    //create LOCAL test array, run array through find, passing the array into callback
+    //create array
+    var testArr = [];
+    //create variable assigned to the result of find. will create new memory location that is NOT equal to array
+    find([1,1,1], function() {
+      testArr.push(1);
+    });
+    //they will never be equalas arrays, so i test them as strings, which will be equal
+    console.log(testArr.toString());
+    eq(testArr.toString(),[1,1,1].toString());
   },
   'callback function should take an element argument':function() {
     fail();
@@ -129,5 +137,7 @@ err on the side of being more explicit
 focus on clarity, not brevity
 
 how do i frame my mind to do things that will lead to progress?
+
+always have a specific example
 */
 </script>
