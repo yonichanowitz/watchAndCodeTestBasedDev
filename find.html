@@ -2,16 +2,18 @@
 
 <script>
   function find(theArray, callbackFunction) {
+    var value = theArray[i].values();
+
     for (var i = 0; i < theArray.length; i++) {
+      
       //make sure to include the () to make the parameter a function
-      callbackFunction(theArray[i]);
-    }
-  
+      callbackFunction(theArray[i],value,i);
+    } 
 }
 
 
 tests({
-  'loop through array, up to array.length amount of times':function() {
+  'execute the callback function once for each index in array':function() {
     //declare array to be tested IN THIS TEST ONLY
     var testArray = [1, 2, 3];
     //declare variable of zero to be added to as counter of ammount of times the function has ran
@@ -23,18 +25,6 @@ tests({
     });
     //check if the function running is equal to my expectation of how many times it will run
     eq(numberOfTimesRan, 3);
-  },
-  'execute the callback function once for each index in array':function() {
-    //create LOCAL test array, run array through find, passing the array into callback
-    //create array
-    var testArr = [];
-    //create variable assigned to the result of find. will create new memory location that is NOT equal to array
-    find([1,1,1], function() {
-      testArr.push(1);
-    });
-    //they will never be equalas arrays, so i test them as strings, which will be equal
-    console.log(testArr.toString());
-    eq(testArr.toString(),[1,1,1].toString());
   },
   'callback function should take an element argument':function() {
     fail();
