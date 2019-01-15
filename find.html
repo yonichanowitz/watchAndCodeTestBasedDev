@@ -2,13 +2,17 @@
 
 <script>
   function find(theArray, callbackFunction) {
-    var value = theArray[i].values();
-
-    for (var i = 0; i < theArray.length; i++) {
-      
-      //make sure to include the () to make the parameter a function
-      callbackFunction(theArray[i],value,i);
-    } 
+  //assigned as something just to run code.
+  var value = "";
+  var result = [];
+  for (var i = 0; i < theArray.length; i++) {
+    value = theArray[i]
+    //make sure to include the () to make the parameter a function
+    if(callbackFunction(value, i, theArray)) {
+      result.push(value);
+    }
+  } 
+  return result;
 }
 
 
@@ -27,16 +31,19 @@ tests({
     eq(numberOfTimesRan, 3);
   },
   'callback function should take element as first argument':function() {
-    fail();
+    find([1],function(value) {
+       eq(value, [1]);
+    });
   },
   'callback function should take index as second argument':function() {
-    fail();
+    find([1], function(value, index) {
+      eq(index, 0);
+    });
   },
-  'execute the callback function once for each index of the array':function() {
-    fail();
-  },
-  'if fucntion returns true, return current element':function() {
-    fail();
+  'if function returns true, return current element':function() {
+    console.log(find([1, 5, 10], function(value) {
+      value >6;
+    }));
   },
   'test each element even if undefined':function() {
     fail();
