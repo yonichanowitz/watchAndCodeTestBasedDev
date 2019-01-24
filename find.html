@@ -4,15 +4,17 @@
   function find(theArray, callbackFunction) {
   //assigned as something just to run code.
   var value = "";
-  var result = [];
+  var foundResult = [];
   for (var i = 0; i < theArray.length; i++) {
-    value = theArray[i]
+    value = theArray[i];
     //make sure to include the () to make the parameter a function
-    if(callbackFunction(value, i, theArray)) {
-      result.push(value);
+    debugger;
+    foundResult.push(callbackFunction(value, i, theArray));
+    if(foundResult[i]) {
+      return value;
     }
   } 
-  return result;
+  return foundResult;
 }
 
 
@@ -41,15 +43,23 @@ tests({
     });
   },
   'if function returns true, return current element':function() {
-    console.log(find([1, 5, 10], function(value) {
-      value >6;
-    }));
+    //how do i get the callback to run if there is nothing in the function, but return something if there is?
+    var found = find([5, 10], function(value) {
+      return value > 6;
+    });
+    eq(found, 10);
   },
-  'test each element even if undefined':function() {
-    fail();
-  },
+  /*'test each element even if undefined':function() {
+    var testArrWithUn = [1, 2, undefined, 3];
+    find(testArrWithUn, function(value, itterator) {
+      eq();
+    });
+  },*/
   'if nothing found return undefined':function() {
-    fail();
+    var impossibleArr = [2, 3, 4];
+    find(impossibleArr, function(value) {
+      return value > 5;
+    });
   },
   'do not mutate origional array':function() {
     fail();
@@ -78,6 +88,9 @@ tests({
   "make sure find() works with strings, booleans and objects": function() {
     fail();
   },
+  "if index is greater than 0, return value": function() {
+    fail();
+  }
 });
 
 
@@ -101,7 +114,7 @@ e) tests the variable (eq) against the number 1 (since the value should have inc
 
 how did he know he was supposed to do that?
 
-   ANSWER: by playing with fucntion
+  ANSWER: by playing with fucntion
 
 to avoid modifying the origional array, i think that i can't use a new variable to asign a result to (to be returned) but rather, 
 have several loops and functions within each other that end in return statements. 
@@ -136,5 +149,16 @@ focus on clarity, not brevity
 how do i frame my mind to do things that will lead to progress?
 
 always have a specific example
+
+was thinkink of using .call() , but that might make things more complicated. 
+
+i looked at the polyfill, and it uses a while loop, to go through the applied array, and if the callback with all it's parameters evaluates to true
+it returns the value.
+
+read through ECMA description of the .find() method
+
+there is something that i am not getting, and i don't know what it is!
+
+how do i make the loop run if there is no return statement provided in callback, but return if there is?
 */
 </script>
