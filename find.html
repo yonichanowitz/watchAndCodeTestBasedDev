@@ -8,18 +8,17 @@
   for (var i = 0; i < theArray.length; i++) {
     value = theArray[i];
     //make sure to include the () to make the parameter a function
-    debugger;
+    
     foundResult.push(callbackFunction(value, i, theArray));
     if(foundResult[i]) {
       return value;
     }
   } 
-  return foundResult;
 }
 
 
 tests({
-  'execute the callback function once for each index in array':function() {
+  '1 execute the callback function once for each index in array':function() {
     //declare array to be tested IN THIS TEST ONLY
     var testArray = [1, 2, 3];
     //declare variable of zero to be added to as counter of ammount of times the function has ran
@@ -32,37 +31,46 @@ tests({
     //check if the function running is equal to my expectation of how many times it will run
     eq(numberOfTimesRan, 3);
   },
-  'callback function should take element as first argument':function() {
+  '2 callback function should take element as first argument':function() {
     find([1],function(value) {
        eq(value, [1]);
     });
   },
-  'callback function should take index as second argument':function() {
+  '3 callback function should take index as second argument':function() {
     find([1], function(value, index) {
       eq(index, 0);
     });
   },
-  'if function returns true, return current element':function() {
+  '4 if function returns true, return current element':function() {
     //how do i get the callback to run if there is nothing in the function, but return something if there is?
     var found = find([5, 10], function(value) {
       return value > 6;
     });
     eq(found, 10);
   },
-  /*'test each element even if undefined':function() {
+  /*'5 test each element even if undefined':function() {
     var testArrWithUn = [1, 2, undefined, 3];
     find(testArrWithUn, function(value, itterator) {
       eq();
     });
   },*/
-  'if nothing found return undefined':function() {
+  '6 if nothing found return undefined':function() {
     var impossibleArr = [2, 3, 4];
-    find(impossibleArr, function(value) {
+    var found = find(impossibleArr, function(value) {
       return value > 5;
     });
+    eq(found, undefined);
   },
-  'do not mutate origional array':function() {
-    fail();
+  '7 do not mutate origional array':function() {
+    var regularArr = [2, 3, 4],
+        comparisonArr = regularArr;
+    find(regularArr, function(value, itterator) {
+      if(value > 2) {
+        regularArr.slice(itterator, itterator+1);
+      }
+      eq(regularArr, comparisonArr);
+    });
+    
   },
   'must take this argument':function() {
     fail();
