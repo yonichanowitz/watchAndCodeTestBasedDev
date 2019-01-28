@@ -1,10 +1,13 @@
 <script src="../simpleTest.js"></script>
 
 <script>
-  function find(theArray, callbackFunction) {
+  function find(theArray, callbackFunction, thisValue) {
   //assigned as something just to run code.
   var value = "";
   var foundResult = [];
+  if(thisValue){
+    callbackFunction = callbackFunction.bind(thisValue);
+  }
   for (var i = 0; i < theArray.length; i++) {
     value = theArray[i];
     //make sure to include the () to make the parameter a function
@@ -67,34 +70,51 @@ tests({
     find(regularArr, function(value, itterator) {
       if(value > 2) {
         regularArr.slice(itterator, itterator+1);
-      }
-      eq(regularArr, comparisonArr);
+      }  
     });
-    
+    for(var i = 0; i < regularArr.length; i++) {
+        eq(regularArr[1], 3);
+      }
   },
-  'must take this argument':function() {
-    fail();
+  '8 must take this argument':function() {
+    var testArray = [1, 2, 3, 4, 5];
+    var found = find(testArray, function(value) {
+      return value > this;
+    }, 3);
+    eq(found, 4);
   },
-  'callback must take index argument, to search array backwards (-1)':function() {
-    fail();
+  '9 Elements that are appended to the array after the call to find begins will not be visited by callback.':function() {
+    var testArray = [1, 2, 3, 4, 5];
+    var found = find(testArray, function(value) {
+      testArray.push(3.5);
+      return value > this;
+    }, 3);
+    eq(found, 4);
   },
-  'if only element is passed as arguments to callback, return all elements':function() {
-    fail();
+  "10 If an existing, unvisited element of the array is changed by callback it's value passed to the visiting callback will be the value at the time that find visits that element's index": function() {
+    var testArray = [1, 2, 3, 4, 5];
+    var found = find(testArray, function(value) {
+      testArray[3] = 3.5;
+      return value > this;
+    }, 3);
+    eq(found, 3.5);
   },
-  'if only index is passed as arguments to callback, return all indexes':function() {
-    fail();
-  },
-  'Elements that are appended to the array after the call to find begins will not be visited by callback.':function() {
-    fail();
-  },
-  "If an existing, unvisited element of the array is changed by callback, its value passed to the visiting callback will be the value at the time that find visits that element's index": function() {
-    fail();
-  },
-  'elements that are deleted are still visited.':function() {
-    fail();
+  '11 elements that are deleted are still visited.':function() {
+    var testArray = [1, 2, 3, 4, 5];
+    testArray.splice(2, 1);
+    var found = find(testArray, function(value) {
+      return value > this;
+    }, 3);
+    eq(found, 4);
   },
   "make sure find() works with strings, booleans and objects": function() {
-    fail();
+    var mixedArr = [1, 'hello', {testKey: 'testString'}, true];
+    var found = find(mixedArr, function(value) {
+      //typeof returns a string yoni!
+      return typeof value === 'object';
+    });
+    eq(found, mixedArr[2]);
+    console.log(mixedArr[2]);
   },
   "if index is greater than 0, return value": function() {
     fail();
