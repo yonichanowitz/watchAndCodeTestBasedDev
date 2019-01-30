@@ -1,0 +1,72 @@
+<script src="../simpleTest.js"></script>
+
+<script>
+  function findIndex(theArray, callbackFunction, thisValue) {
+    var value = "";
+    var foundResult = [];
+    if(thisValue){
+      callbackFunction = callbackFunction.bind(thisValue);
+    }
+
+    for (var index = 0; index < theArray.length; index++) {
+      value = theArray[index];   
+      foundResult.push(callbackFunction(value, index, theArray));
+      if(foundResult[index]) {
+        return index;
+      }
+    } 
+  }
+//i will use arrays with letters instead of numbers 
+//because the function is supposed to give back the index, which should always be a number, and i don't want to get confused
+tests({
+  
+  '1 run callback array.length times.':function() {
+    var testArray = ['a', 'b', 'c'],
+        thingToBeAddedTo = 0;
+    findIndex(testArray, function() { 
+      thingToBeAddedTo++
+    });
+    eq(thingToBeAddedTo, 3)
+  },
+  '2 pass in the "i"th element as first argument to callback': function() {
+    var testArray = ['a'];
+    findIndex(testArray, function(value) { 
+      eq(value, 'a');
+    });
+  },
+  '3 pass position of index ("i"th position) as second argument': function() {
+    var testArray = ['a'];
+    findIndex(testArray, function(value, index) { 
+      eq(index, 0);
+    });
+  },
+  /* '4 callback is invoked with 3 arguments: The value of the element, The index of the element, The Array object being traversed.':function() {
+    fail();
+   }, */
+  '5 returns the index of the first element in the array that satisfies the provided testing function.':function() {
+    fail();
+  },
+  '6 If a thisArg parameter is passed to findIndex, it will be used as the this inside each invocation of the callback.':function() {
+    fail();
+  },
+  '7  If the callback never returns a truthy value , it returns -1.':function() {
+    fail();
+  },
+  '8 executes the callback function once for every array index until it finds one where callback returns a truthy value.':function() {
+    fail();
+  },
+  '9 the arrays length is 0, findIndex returns -1.':function() {
+    fail();
+  },
+  '10  the callback is called even for indexes of entries not present in the array.':function() {
+    fail();
+  },
+  '11 Elements appended to the array after the call to findIndex begins will not be processed by callback.':function() {
+    fail();
+  },
+  '12 elements that are deleted are still visited.':function() {
+    fail();
+  }
+});
+
+</script>
