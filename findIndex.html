@@ -3,18 +3,22 @@
 <script>
   function findIndex(theArray, callbackFunction, thisValue) {
     var value = "";
+    var index = 0;
     var foundResult = [];
     if(thisValue){
       callbackFunction = callbackFunction.bind(thisValue);
     }
 
-    for (var index = 0; index < theArray.length; index++) {
-      value = theArray[index];   
-      foundResult.push(callbackFunction(value, index, theArray));
-      if(foundResult[index]) {
-        return index;
-      }
-    } 
+    for (index; index < theArray.length; index++) {
+      value = theArray[index]; 
+      if(callbackFunction(value, index, theArray)) {
+        foundResult.push(index);
+      }   
+    }
+    if(foundResult && foundResult != "") {
+        return foundResult; 
+    }
+    return -1;
   }
 //i will use arrays with letters instead of numbers 
 //because the function is supposed to give back the index, which should always be a number, and i don't want to get confused
@@ -40,17 +44,30 @@ tests({
       eq(index, 0);
     });
   },
-  /* '4 callback is invoked with 3 arguments: The value of the element, The index of the element, The Array object being traversed.':function() {
-    fail();
-   }, */
+  // '4 callback is invoked with 3 arguments: The value of the element, The index of the element, The Array object being traversed.':function() {
+  //   fail();
+  // },
   '5 returns the index of the first element in the array that satisfies the provided testing function.':function() {
-    fail();
+    var testArray = ['a', 'b', 'c'];
+    var result = findIndex(testArray, function(value, index) { 
+      return value === 'b';
+    });
+    eq(result, 1);
   },
   '6 If a thisArg parameter is passed to findIndex, it will be used as the this inside each invocation of the callback.':function() {
-    fail();
+    var testArray = ['a', 'b', 'c'];
+    findIndex(testArray, function(value, index) { 
+      eq(this, 'b'); 
+      }, 
+    testArray[1]
+    ); 
   },
   '7  If the callback never returns a truthy value , it returns -1.':function() {
-    fail();
+    var testArray = ['a', 'b', 'c'];
+    var result = findIndex(testArray, function(value, index) { 
+      return value === 'd';
+      });
+      eq(result, -1); 
   },
   '8 executes the callback function once for every array index until it finds one where callback returns a truthy value.':function() {
     fail();
