@@ -3,12 +3,13 @@
 <script>
   function findIndex(theArray, callbackFunction, thisValue) {
     var value = "";
+    var arrayLength = theArray.length;
     var foundResult = [];
     if(thisValue){
       callbackFunction = callbackFunction.bind(thisValue);
     }
 
-    for (var index = 0; index < theArray.length; index++) {
+    for (var index = 0; index < arrayLength; index++) {
       value = theArray[index]; 
       if(callbackFunction(value, index, theArray)) {
         foundResult.push(index);
@@ -92,14 +93,18 @@ tests({
   '11 Elements appended to the array after the call to findIndex begins will not be processed by callback.':function() {
     var testArray = [1, 2, 3, 5];
     var result = findIndex(testArray, function(value, index) { 
-      debugger
-      return value == 'z';
       testArray.push('z');
+      return value == 'z';
       });
       eq(result, -1);
   },
-  '12 elements that are deleted are still visited.':function() {
-    fail();
+  '12 elements that are deleted are not visited.':function() {
+    var testArray = ['a', 'b', 'c', 'd'];
+    var result = findIndex(testArray, function(value, index) { 
+      testArray.splice(2,1);
+      return value === 'c';
+      });
+      eq(result, -1);
   }
 });
 
