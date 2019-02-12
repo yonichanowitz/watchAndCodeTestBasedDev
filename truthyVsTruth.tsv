@@ -1,17 +1,17 @@
 			
-	===true',	== true;',	Boolean();,
-TRUE,	yes,	yes,	yes,
-Object,	no,	no,	yes,
-string,	no,	no,	yes,
-0,	no,	no,	no,
-1,	no,	yes,	yes,
-2,	no,	no,	yes,
-'empty quotation marks'	no,	no,	no,
-array,	no,	no,	yes,
-NaN,	no,	no,	no,
-undefined,	no,	no,	no,
-null,	no,	no,	no,
-FALSE,	no,	no,	no,
+	===true'	== true;'	Boolean();
+TRUE	yes	yes	yes
+Object	no	no	yes
+string	no	no	yes
+0	no	no	no
+1	no	yes	yes
+2	no	no	yes
+'empty quotation marks'	no	no	no
+array	no	no	yes
+NaN	no	no	no
+undefined	no	no	no
+null	no	no	no
+FALSE	no	no	no
 !false	yes	yes	yes
 !Object	no	no	no
 !string	no	no	no
