@@ -1,0 +1,27 @@
+			
+	===true'	== true;'	Boolean();
+TRUE	yes	yes	yes
+Object	no	no	yes
+string	no	no	yes
+0	no	no	no
+1	no	yes	yes
+2	no	no	yes
+""	no	no	no
+array	no	no	yes
+NaN	no	no	no
+undefined	no	no	no
+null	no	no	no
+FALSE	no	no	no
+!false	yes	yes	yes
+!Object	no	no	no
+!string	no	no	no
+!0	yes	yes	yes
+!-0	yes	yes	yes
+!1	no	no	no
+!2	no	no	no
+!""	yes	yes	yes
+!array	no	no	no
+!NaN	yes	yes	yes
+!undefined	yes	yes	yes
+!null	yes	yes	yes
+!false	yes	yes	yes
