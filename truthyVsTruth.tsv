@@ -10,8 +10,8 @@ string,	no,	no,	yes,
 array,	no,	no,	yes,
 NaN,	no,	no,	no,
 undefined,	no,	no,	no,
-null	no	no	no
-FALSE	no	no	no
+null,	no,	no,	no,
+FALSE,	no,	no,	no,
 !false	yes	yes	yes
 !Object	no	no	no
 !string	no	no	no
