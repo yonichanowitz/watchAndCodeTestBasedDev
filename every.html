@@ -4,7 +4,7 @@
   function every(theArray, callback) {
     var ArrLength = theArray.length,
         i = 0;
-        //debugger;
+        debugger;
     for(i;i < ArrLength; i++) {
       if(callback(theArray[i], i, theArray)) {
         continue;
@@ -16,18 +16,7 @@
       return true;
     }  
   }
-/*
-This method returns true for any condition put on an empty array.
-where callback returns a falsy value. If such an element is found, the every method immediately returns false
-if callback returns a truthy value for all elements, every returns true
 
-If a thisArg parameter is provided to every, it will be used as callback's this value. 
-every does not mutate the array on which it is called.
-The range of elements processed by every is set before the first invocation of callback
-Elements which are appended to the array after the call to every begins will not be visited
-If existing elements of the array are changed, their value as passed to callback will be the value at the time every visits them
-elements that are deleted are not visited
-*/
 tests({
   
   '1 executes the provided callback function once for each element present in array.':function() {
@@ -54,33 +43,40 @@ tests({
   '4 and the Array object being traversed.':function() {
     var testArr = [1, 2, 3];
     every(testArr, function(number, index, theArrayBeingTraversed) {
-      eq(theArrayBeingTraversed, [1, 2, 3]);
+      eq(theArrayBeingTraversed, testArr);
     });
   },
-  '5 .':function() {
+  '5 The range of elements processed by every is set before the first invocation of callback.':function() {
     fail();
   },
-  '6 .':function() {
+  '6 This method returns true for any condition put on an empty array..':function() {
     fail();
   },
-  '7 .':function() {
+  '7 where callback returns a falsy value. If such an element is found, the every method immediately returns false.':function() {
     fail();
   },
-  '8 .':function() {
+  '8 if callback returns a truthy value for all elements, every returns true.':function() {
     fail();
   },
-  '9 .':function() {
+  "9 If a thisArg parameter is provided to every, it will be used as callback's this value.":function() {
     fail();
   },
-  '10 .':function() {
+  '10 every does not mutate the array on which it is called.':function() {
     fail();
   },
-  '11 .':function() {
+  '11 elements that are deleted are not visited.':function() {
     fail();
   },
-  '12 .':function() {
+  '12 If existing elements of the array are changed, their value as passed to callback will be the value at the time every visits them.':function() {
+    fail();
+  },
+  '13 Elements which are appended to the array after the call to every begins will not be visited.':function() {
     fail();
   }
 });
 
+/* 
+(elements which are of boolean type true are trhuthy 
+(ex: null gives false if you do "Boolean(null)", so null is "falsy"). That s my two cents)
+*/
 </script>
